@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-header">
+    {{title}}
+  </div>
+  <div class="card-body">
+  
+  
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+  
+            <th>First Name <i class="fa fa-arrow-up" (click)="sortedColumn='firstName'; order='asc'"></i> <i
+                class="fa fa-arrow-down" (click)="sortedColumn='firstName'; order='desc'"></i>
+              <div><input type="text" [(ngModel)]="filterText"></div>
+            </th>
+  
+            <th>Last Name <i class="fa fa-arrow-up" (click)="sortedColumn='lastName'; order='asc'"></i> <i
+                class="fa fa-arrow-down" (click)="sortedColumn='lastName'; order='desc'"></i>
+              <div><input type="text" [(ngModel)]="filterText1"></div>
+            </th>
+  
+            <th class="width-1">Email <i class="fa fa-arrow-up" (click)="sortedColumn='email'; order='asc'"></i> <i
+                class="fa fa-arrow-down" (click)="sortedColumn='email'; order='desc'"></i>
+              <div><input type="text" [(ngModel)]="filterText2"></div>
+            </th>
+  
+            <th>Phone <i class="fa fa-arrow-up" (click)="sortedColumn='phone'; order='asc'"></i> <i
+                class="fa fa-arrow-down" (click)="sortedColumn='phone'; order='desc'"></i>
+              <div><input type="text" [(ngModel)]="filterText3"></div>
+            </th>
+  
+            <th>City <i class="fa fa-arrow-up" (click)="sortedColumn='city'; order='asc'"></i> <i class="fa fa-arrow-down"
+                (click)="sortedColumn='city'; order='desc'"></i>
+              <div><input type="text" [(ngModel)]="filterText4"></div>
+            </th>
+  
+            <th>State <i class="fa fa-arrow-up" (click)="sortedColumn='state'; order='asc'"></i> <i
+                class="fa fa-arrow-down" (click)="sortedColumn='state'; order='desc'"></i>
+              <div><input type="text" [(ngModel)]="filterText5"></div>
+            </th>
+  
+            <th>Action</th>
+  
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr *ngFor="let user of users | search: filterText: filterText1: filterText2: filterText4: filterText5: filterText3 | sort: sortedColumn: order |  paginate: {
+                              id: 'listing-pagination',
+                              itemsPerPage: 5,
+                              currentPage: page
+                          }">
+  
+  
+  
+            <td>{{user.firstName | uppercase}}</td>
+            <td>{{user.lastName | uppercase}}</td>
+            <td class="width-1">{{user.email | lowercase}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.city | uppercase}}</td>
+            <td>{{user.state | uppercase}}</td>
+            <td class="cursor width"><a style="text-decoration: none;" (click)="openModal(user)"><i class="fa fa-eye"></i></a>
+              <a (click)="deleteData(user.id)"><i class="fa fa-trash-o"> </i></a> <a (click)="openUpdate(user)"><i
+                  class='fa fa-edit'></i></a></td>
+  
+          </tr>
+        </tbody>
+  
+        <div class="pagination">
+          <pagination-controls id="listing-pagination" maxSize="5" directionLinks="true" (pageChange)="page=$event">
+          </pagination-controls>
+        </div>
+  
+      </table>
+    </div>
+  </div>
+  
+  <div class="modal" id="myModal" [ngClass]="{'show':showModal}" *ngIf="showModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">User Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <ul>
+            <li><b>Full Name:</b> {{userModal.firstName | uppercase}} {{userModal.lastName | uppercase}}</li><br>
+            <li><b>Email:</b> {{userModal.email | lowercase}}</li><br>
+            <li><b>Phone Number:</b> {{userModal.phone}}</li><br>
+            <li><b>Address:</b> {{userModal.city | uppercase}},{{userModal.state | uppercase}}</li><br>
+          </ul>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="showModal=false">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" id="myModal" [ngClass]="{'show':showUpdate}" *ngIf="showUpdate">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">User Update</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <app-update [user]="userModal" ></app-update>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+</div>
+

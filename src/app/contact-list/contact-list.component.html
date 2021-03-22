@@ -1,0 +1,192 @@
+<!-- <div class="card">
+    <div class="card-header">
+      {{title}}
+    </div>
+    <div class="card-body">
+      
+    
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+    
+              <th>Name <i class="fa fa-arrow-up" (click)="sortedColumn='name'; order='asc'"></i> <i
+                  class="fa fa-arrow-down" (click)="sortedColumn='name'; order='desc'"></i>
+                <div><input type="text" [(ngModel)]="filterText"></div>
+              </th>
+    
+              
+    
+              <th>Email <i class="fa fa-arrow-up" (click)="sortedColumn='email'; order='asc'"></i> <i
+                  class="fa fa-arrow-down" (click)="sortedColumn='email'; order='desc'"></i>
+                <div><input type="text" [(ngModel)]="filterText2"></div>
+              </th>
+    
+              <th>Phone <i class="fa fa-arrow-up" (click)="sortedColumn='phone'; order='asc'"></i> <i
+                  class="fa fa-arrow-down" (click)="sortedColumn='phone'; order='desc'"></i>
+                <div><input type="text" [(ngModel)]="filterText3"></div>
+              </th>
+    
+              
+    
+              <th>Action</th>
+    
+            </tr>
+          </thead>
+    
+          <tbody>
+            <tr *ngFor="let contact of contacts |  paginate: {
+                                id: 'listing-pagination',
+                                itemsPerPage: 5,
+                                currentPage: page
+                            }">
+    
+    
+    
+              <td>{{contact.name | uppercase}}</td>
+              
+              <td>{{contact.email | lowercase}}</td>
+              <td>{{contact.phone}}</td>
+              
+              <!-- <td class="cursor"><a style="text-decoration: none;" (click)="openModal(contact)"><i class="fa fa-eye"></i></a>
+                <a (click)="deleteData(contact.id)"><i class="fa fa-trash-o"> </i></a> <a (click)="openUpdate(contact)"><i
+                    class='fa fa-edit'></i></a></td> -->
+<!--     
+            </tr>
+          </tbody>
+    
+          <div class="pagination">
+            <pagination-controls id="listing-pagination" maxSize="5" directionLinks="true" (pageChange)="page=$event">
+            </pagination-controls>
+          </div>
+    
+        </table> 
+
+        
+      </div>
+    </div>  -->
+
+    
+
+    <div class="card">
+      <div class="card-header">
+        Contact List
+      </div>
+      
+      <div class="card-body">
+        <div class="search-div">
+          <button mat-raised-button (click)="openDialog()">
+            <mat-icon>add</mat-icon>Create
+          </button>
+        <mat-form-field class="search-form-field" floatLabel="never">
+          <input matInput  [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <!-- <button class="float-direction" mat-icon-button color="warn"><mat-icon (click)="exporter.exportTable('xlxs',{filename: 'contact list'})">download</mat-icon></button> -->
+        
+        <button class="float-direction" mat-icon-button color="warn"><mat-icon (click)="download()">download</mat-icon></button>
+        <mat-form-field class="float-direction box-size" appearance="fill">
+          
+          <mat-select [(value)]="selected">
+            <mat-option value="csv">
+                csv
+            </mat-option>
+            <mat-option value="xls">
+              xls
+          </mat-option>
+          </mat-select>
+        </mat-form-field>
+          
+        
+
+        
+        
+        </div>
+
+        <div class="search-div">
+          <button class="float-direction" mat-raised-button *ngIf="hasValue" (click)="removeSelectedRows()">Delete Selected</button>
+          <button class="float-direction" mat-raised-button *ngIf="hasValue" (click)="downloadSelectedRows()">Download Selected</button>
+        </div>
+        
+        <div class="search-div">
+          <button mat-raised-button (click)="openFilter()">
+            <mat-icon>search</mat-icon>Search by Column
+          </button>
+        </div>
+        <div>
+        <mat-form-field *ngIf="isFilterOpen" class="search-form-field-1" >
+          <input matInput  [(ngModel)]="filterText" placeholder="Name" autocomplete="off" (keyup)="applyColumnFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filterText"  (click)="onNameClear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field *ngIf="isFilterOpen" class="search-form-field-1">
+          <input matInput  [(ngModel)]="filterText1" placeholder="Email" autocomplete="off" (keyup)="applyColumnFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filterText1"  (click)="onEmailClear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field *ngIf="isFilterOpen" class="search-form-field-1" >
+          <input matInput  [(ngModel)]="filterText2" placeholder="Phone" autocomplete="off" (keyup)="applyColumnFilter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="filterText2"  (click)="onPhoneClear()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        
+        </div>
+
+
+
+        
+          <div class="mat-elevation-z8">
+            <cdk-virtual-scroll-viewport itemSize="5" class="virtual-scroll">
+              <mat-table  [dataSource]="listData"  matTableExporter #exporter="matTableExporter" matSort >
+                <ng-container class="mat-column-select" matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef><button  mat-raised-button *ngIf="!hasValue" (click)="selectAll()">Select All</button> &nbsp;&nbsp;<button *ngIf="hasValue" mat-raised-button (click)="unselectAll()">Clear All</button></mat-header-cell>
+                  
+                  <mat-cell *matCellDef="let row">
+                    
+                    <mat-checkbox (click)="$event.stopPropagation()" 
+                    (change)="$event ? selection.toggle(row) : null; onSelect()"
+                    [checked]="selection.isSelected(row)"></mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+                <ng-container class="mat-column-name" matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef  mat-sort-header><strong>Name</strong></mat-header-cell>
+
+                  <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+                </ng-container>
+                <ng-container class="mat-column-email" matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef  mat-sort-header><strong>Email</strong></mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+                </ng-container>
+                <ng-container class="mat-column-phone" matColumnDef="phone">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><strong>Mobile</strong></mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.phone}}</mat-cell>
+                </ng-container>
+                
+                <ng-container class="mat-column-action" matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="warn"><mat-icon (click)="onEdit(row)">edit</mat-icon></button>
+                    <button mat-icon-button color="warn"><mat-icon (click)="deleteData(row.id)">delete_outline</mat-icon></button>
+                  </mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                
+              </mat-table>
+            </cdk-virtual-scroll-viewport>
+            
+            <mat-paginator  [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+          </div>
+        
+
+     
+      </div>
+      
+    </div>
+    

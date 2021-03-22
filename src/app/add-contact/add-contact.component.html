@@ -1,0 +1,132 @@
+<!-- <div class="card">
+    <div class="card-header">
+      <b>Add Contact</b>
+    </div>
+    
+    <div class="card-body">
+      <form novalidate (ngSubmit)="save()" [formGroup]="contactForm">
+    
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="nameId">Name</label>
+          <div class="col-md-8">
+              <input class="form-control" id="nameId" type="text" placeholder="First Name (required)"
+              formControlName="name"
+              [ngClass]="{'is-invalid': (contactForm.get('name').touched || contactForm.get('name').dirty) && !contactForm.get('name').valid }" />
+    
+            <span class="invalid-feedback">
+    
+              <span *ngIf="contactForm.get('name').errors?.required">
+                Please enter your  name.
+              </span>
+    
+            </span>
+    
+          </div>
+        </div>
+        
+       
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="emailId">Email</label>
+          <div class="col-md-8">
+            <input class="form-control" id="emailId" type="email" placeholder="Email (required)" formControlName="email"
+              [ngClass]="{'is-invalid': 
+                                                 ((contactForm.get('email').touched || 
+                                                  contactForm.get('email').dirty) && 
+                                                  !contactForm.get('email').valid) }" />
+            <span class="invalid-feedback">
+              <span *ngIf="contactForm.get('email').errors?.required">
+                Please enter your email address.
+              </span>
+              <span *ngIf="contactForm.get('email').errors?.email">
+                Please enter a valid email address.
+              </span>
+            </span>
+          </div>
+        </div>
+    
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="phoneId">Phone</label>
+          <div class="col-md-8">
+            <input class="form-control" id="phoneId" type="text" placeholder="Phone" formControlName="phone"
+              [ngClass]="{'is-invalid': !contactForm.get('phone').valid && (contactForm.get('phone').touched || contactForm.get('phone').dirty)}" />
+            <span class="invalid-feedback">
+              <span *ngIf="contactForm.get('phone').errors?.required">
+                Please enter your phone number.
+              </span>
+              <span *ngIf="contactForm.get('phone').errors?.pattern">
+                Entered phone number is not valid.
+              </span>
+            </span>
+          </div>
+        </div>
+    
+        
+   
+    
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+              [title]="contactForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+              [disabled]="!contactForm.valid">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary" type="button" (click)="reset()">Reset</button>
+    
+          </div>
+        </div>
+      </form>
+    
+    
+    </div>
+  </div>
+   -->
+
+   <mat-toolbar>
+    <span>New Contact</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+  </mat-toolbar>
+
+   
+    <form  [formGroup]="contactForm" class="normal-form" (submit)="save()">
+       <mat-grid-list cols="1" rowHeight="300px" rowWidth="200px">
+        
+          
+          <mat-grid-tile>
+            <div class="controles-container"> 
+            <mat-form-field>
+              <input formControlName="name" matInput placeholder="Name*">
+              <mat-error>This field is mandatory.</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input formControlName="email" matInput placeholder="Email">
+              <mat-error>Invalid email address.</mat-error>
+            </mat-form-field>
+           
+              <mat-form-field>
+                <input formControlName="phone" matInput placeholder="Mobile*">
+                <mat-error *ngIf="contactForm.controls['phone'].errors?.required">This field is mandatory.</mat-error>
+                <mat-error *ngIf="contactForm.controls['phone'].errors?.pattern">Invalid</mat-error>
+              </mat-form-field>
+              
+              <div class="button-row">
+                <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Submit</button>
+                <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+              </div>
+              
+
+            </div>
+          
+           
+          </mat-grid-tile>
+          
+        
+            
+            
+        
+      </mat-grid-list> 
+    </form>
+    
+  
+  
+   

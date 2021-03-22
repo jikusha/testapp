@@ -1,0 +1,41 @@
+
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <a  class="navbar-brand">{{title}}</a>
+  <ul class="nav nav-pills ">
+    <li><a routerLink="/add" class="nav-link " >Add User</a></li>
+    <li><a routerLink="/users" class="nav-link" >User List</a></li>
+    
+    <li><a routerLink="/contacts" class="nav-link" >Contact List</a></li>
+  </ul>
+  <ul class="nav nav-pills ml-auto ">
+    <li class="nav-item"
+        *ngIf="isLoggedIn">
+      <a class="nav-link">Welcome {{ userName }}</a>
+    </li>
+    <li class="nav-item" *ngIf="!isDisplayed">
+      <a class="nav-link"  (click)="displayMessages()">Show Messages</a>
+    </li>
+    <li class="nav-item" *ngIf="isDisplayed">
+      <a class="nav-link" routerLinkActive="active" (click)="hideMessages()">Hide Messages</a>
+    </li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/register"  class="nav-link">Register</a></li>
+    <li *ngIf="!isLoggedIn"><a routerLink="/signin"  class="nav-link">Sign In</a></li>
+    <li *ngIf="isLoggedIn"><a (click)="logOut()"  class="nav-link">Logout</a></li>
+  </ul>
+</nav>
+<div class="container">
+  
+  <div class="row">
+    <div class="col-md-10" [@slideInAnimation]="o.isActivated? o.activatedRoute: ''">
+     
+        <router-outlet #o="outlet"></router-outlet>
+    
+      
+    </div>
+    <div class="col-md-2">
+      
+        <router-outlet name="popup"></router-outlet>
+     
+      
+    </div>
+</div>

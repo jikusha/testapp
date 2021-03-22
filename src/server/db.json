@@ -1,0 +1,130 @@
+{
+  "users": [
+    {
+      "firstName": "Rupam",
+      "lastName": "Sarmah",
+      "email": "rupam@yahoo.com",
+      "phone": "9435936026",
+      "city": "Guwahati",
+      "state": "Assam",
+      "id": 6
+    },
+    {
+      "firstName": "Rima",
+      "lastName": "Sarmah",
+      "email": "rima@gmail.com",
+      "phone": "8135674198",
+      "city": "Nagaon",
+      "state": "Assam",
+      "id": 9
+    },
+    {
+      "firstName": "Jiku",
+      "lastName": "Sandilya",
+      "email": "jikushandilya@gmail.com",
+      "phone": "8638089966",
+      "city": "Ahmedabad",
+      "state": "Gujrat",
+      "id": 13
+    },
+    {
+      "firstName": "Kumar",
+      "lastName": "Pranay",
+      "email": "kumar@gmail.com",
+      "phone": "9854605927",
+      "city": "Darbhanga",
+      "state": "Bihar",
+      "id": 16
+    },
+    {
+      "firstName": "Tabrez",
+      "lastName": "Hussain",
+      "email": "tabrez11@gmail.com",
+      "phone": "9365212121",
+      "city": "Jorhat",
+      "state": "Assam",
+      "id": 17
+    },
+    {
+      "firstName": "Debajit ",
+      "lastName": "Malakar",
+      "email": "d.malakar@gmail.com",
+      "phone": "9878676543",
+      "city": "Ranchi",
+      "state": "Jharkhand",
+      "id": 18
+    },
+    {
+      "firstName": "Swapnil",
+      "lastName": "Jadon",
+      "email": "s.jadon@gmail.com",
+      "phone": "8134044197",
+      "city": "Nagaon",
+      "state": "Andhra Pradesh",
+      "id": 19
+    },
+    {
+      "firstName": "Satyajeet ",
+      "lastName": "Naidu",
+      "email": "s.naidu@cgi.com",
+      "phone": "9435673455",
+      "city": "Patna",
+      "state": "Bihar",
+      "id": 20
+    },
+    {
+      "firstName": "Amiyo",
+      "lastName": "Pegu",
+      "email": "mech@yahoo.com",
+      "phone": "8767543212",
+      "city": "Ranchi",
+      "state": "Jharkhand",
+      "id": 21
+    },
+    {
+      "firstName": "Kamal ",
+      "lastName": "Pandey",
+      "email": "kamal@cgi.com",
+      "phone": "8135674198",
+      "city": "Silchar",
+      "state": "Assam",
+      "id": 23
+    },
+    {
+      "firstName": "Manjit",
+      "lastName": "Borah",
+      "email": "manjitborah2710@gmail.com",
+      "phone": "8638716833",
+      "city": "Ahmedabad",
+      "state": "Gujrat",
+      "id": 24
+    },
+    {
+      "firstName": "Bankim",
+      "lastName": "Saikia",
+      "email": "babau@gmail.com",
+      "phone": "9678123234",
+      "city": "Nagaon",
+      "state": "Assam",
+      "id": 25
+    },
+    {
+      "firstName": "Mriganka",
+      "lastName": "Goswami",
+      "email": "pg@gmail.com",
+      "phone": "8765432123",
+      "city": "Darbhanga",
+      "state": "Bihar",
+      "id": 26
+    },
+    {
+      "firstName": "Jiku",
+      "lastName": "Sandilya",
+      "email": "manashbhatta@gmail.com",
+      "phone": "9435674197",
+      "city": "Allahabad",
+      "state": "Uttar Pradesh",
+      "id": 27
+    }
+  ]
+}

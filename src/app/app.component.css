@@ -1,0 +1,15 @@
+.nav-link {
+    cursor: pointer;
+    color:tan
+}
+.navbar-brand {
+    color:sandybrown;
+}
+
+.nav  li a:hover {
+    color: thistle;
+ }
+
+ nav {
+     height: 12%;
+ }

@@ -1,0 +1,43 @@
+
+<div class="card">
+  <div class="card-header">
+    Sign In 
+</div>
+
+<div class="card-body">
+    <form novalidate (ngSubmit)="login()" [formGroup]="userForm">
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="emailId">Email</label>
+            <div class="col-md-8">
+              <input class="form-control" id="emailId" type="email" placeholder="Email (required)" formControlName="email">
+              
+            </div>
+          </div>
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="passwordId">Password</label>
+            <div class="col-md-8">
+                <input class="form-control" id="passwordId" type="password" placeholder="Password (required)"
+                formControlName="password" />
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+              <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+                [title]="userForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                [disabled]="!userForm.valid">
+                Log In
+              </button>
+              <button class="btn btn-outline-secondary" type="button" (click)="reset()">Reset</button>
+              
+            </div>
+            <a routerLink="/forget">Forget Password?</a>
+          </div>
+
+          
+
+    </form>
+</div>
+</div>
+
+

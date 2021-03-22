@@ -1,0 +1,86 @@
+<div class="card">
+  <div class="card-header">
+    Registration 
+</div>
+
+<div class="card-body">
+    <form novalidate (ngSubmit)="save()" [formGroup]="userForm">
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="emailId">Email</label>
+            <div class="col-md-8">
+              <input class="form-control" id="emailId" type="email" placeholder="Email (required)" formControlName="email"
+                [ngClass]="{'is-invalid': 
+                                                   ((userForm.get('email').touched || 
+                                                    userForm.get('email').dirty) && 
+                                                    !userForm.get('email').valid) }" />
+              <span class="invalid-feedback">
+                <span *ngIf="userForm.get('email').errors?.required">
+                  Please enter your email address.
+                </span>
+                <span *ngIf="userForm.get('email').errors?.email">
+                  Please enter a valid email address.
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <!-- <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="passwordId">Password</label>
+            <div class="col-md-8">
+                <input class="form-control" id="passwordId" type="password" placeholder="Password (Required)
+                formControlName="password"
+                [ngClass]="{'is-invalid': (userForm.get('password').touched || userForm.get('password').dirty) && !userForm.get('password').valid }" />
+      
+              <span class="invalid-feedback">
+      
+                <span *ngIf="userForm.get('password').errors?.required">
+                  Please enter password.
+                </span>
+      
+              </span>
+      
+            </div>
+          </div> -->
+
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label" for="passwordId">Password</label>
+            <div class="col-md-8">
+                <input class="form-control" id="passwordId" type="password" placeholder="Password (required)"
+                formControlName="password"
+                [ngClass]="{'is-invalid': (userForm.get('password').touched || userForm.get('password').dirty) && !userForm.get('password').valid }" />
+      
+              <span class="invalid-feedback">
+      
+                <span *ngIf="userForm.get('password').errors?.required">
+                  Please enter password.
+                </span>
+
+                <span *ngIf="userForm.get('password').errors?.minlength">
+                    Length should be minimum 6
+                  </span>
+
+      
+              </span>
+      
+            </div>
+          </div>
+
+          <div class="form-group row mb-2">
+            <div class="offset-md-2 col-md-4">
+              <button class="btn btn-primary mr-3" type="submit" style="width:80px"
+                [title]="userForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                [disabled]="!userForm.valid">
+                Save
+              </button>
+              <button class="btn btn-outline-secondary" type="button" (click)="reset()">Reset</button>
+      
+            </div>
+          </div>
+
+    </form>
+</div>
+
+
+
+</div>
+
